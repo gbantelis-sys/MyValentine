@@ -1,69 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Valentine 💘</title>
-  <style>
-    body {
-      height: 100vh;
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: Arial, sans-serif;
-      background: #ffe6eb;
-    }
+<meta charset="UTF-8">
+<title>Valentine 💘</title>
+<style>
+  body {
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background: #ffe6eb;
+    overflow: hidden; /* prevent scrollbars when button moves */
+  }
 
-    .container {
-      text-align: center;
-    }
+  .container {
+    text-align: center;
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
 
-    h1 {
-      margin-bottom: 30px;
-    }
+  h1 {
+    margin-bottom: 30px;
+  }
 
-    .buttons {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-    }
+  button {
+    padding: 12px 28px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    position: absolute;
+  }
 
-    button {
-      padding: 12px 28px;
-      font-size: 18px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
+  .yes {
+    background-color: #4caf50;
+    color: white;
+    top: 50%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+  }
 
-    .yes {
-      background-color: #4caf50;
-      color: white;
-    }
+  .no {
+    background-color: #f44336;
+    color: white;
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+  }
 
-    .no {
-      background-color: #f44336;
-      color: white;
-    }
+  .hidden {
+    display: none;
+  }
 
-    .hidden {
-      display: none;
-    }
-
-    img {
-      width: 250px;
-      margin-top: 20px;
-    }
-  </style>
+  img {
+    width: 250px;
+    margin-top: 20px;
+  }
+</style>
 </head>
 <body>
 
 <div class="container" id="main">
   <h1>Will you be my Valentine? 💘</h1>
-  <div class="buttons">
-    <button class="yes" onclick="alert('Yay!! 💕')">Yes</button>
-    <button class="no" id="noBtn">No</button>
-  </div>
+  <button class="yes" onclick="alert('Yay!! 💕')">Yes</button>
+  <button class="no" id="noBtn">No</button>
 </div>
 
 <div class="container hidden" id="cat">
@@ -72,30 +75,39 @@
 </div>
 
 <script>
-  const noBtn = document.getElementById("noBtn");
-  const main = document.getElementById("main");
-  const cat = document.getElementById("cat");
+const noBtn = document.getElementById("noBtn");
+const main = document.getElementById("main");
+const cat = document.getElementById("cat");
 
-  let count = 0;
+let count = 0;
 
-  noBtn.addEventListener("mouseenter", () => {
-    count++;
+function moveButtonRandomly(button) {
+  const padding = 20; // keep button inside screen
+  const maxX = window.innerWidth - button.offsetWidth - padding;
+  const maxY = window.innerHeight - button.offsetHeight - padding;
 
-    // swap buttons
-    const parent = noBtn.parentElement;
-    parent.insertBefore(noBtn, parent.children[0]);
+  const randomX = Math.floor(Math.random() * maxX) + padding;
+  const randomY = Math.floor(Math.random() * maxY) + padding;
 
-    if (count >= 6) {
-      main.classList.add("hidden");
-      cat.classList.remove("hidden");
+  button.style.left = randomX + "px";
+  button.style.top = randomY + "px";
+}
 
-      setTimeout(() => {
-        count = 0;
-        cat.classList.add("hidden");
-        main.classList.remove("hidden");
-      }, 2000);
-    }
-  });
+noBtn.addEventListener("click", () => {
+  count++;
+  moveButtonRandomly(noBtn);
+
+  if (count >= 6) {
+    main.classList.add("hidden");
+    cat.classList.remove("hidden");
+
+    setTimeout(() => {
+      count = 0;
+      cat.classList.add("hidden");
+      main.classList.remove("hidden");
+    }, 2000);
+  }
+});
 </script>
 
 </body>
