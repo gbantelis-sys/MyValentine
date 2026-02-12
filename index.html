@@ -12,7 +12,7 @@
     align-items: center;
     font-family: Arial, sans-serif;
     background: #ffe6eb;
-    overflow: hidden; /* prevent scrollbars when button moves */
+    overflow: hidden;
   }
 
   .container {
@@ -65,7 +65,7 @@
 
 <div class="container" id="main">
   <h1>Will you be my Valentine? 💘</h1>
-  <button class="yes" onclick="alert('Yay!! 💕')">Yes</button>
+  <button class="yes" id="yesBtn">Yes</button>
   <button class="no" id="noBtn">No</button>
 </div>
 
@@ -74,15 +74,22 @@
   <img src="angry cat.png" alt="angry cat">
 </div>
 
+<div class="container hidden" id="yesResult">
+  <h1>Yay!! 💕</h1>
+  <img src="yes.png" alt="happy image">
+</div>
+
 <script>
 const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
 const main = document.getElementById("main");
 const cat = document.getElementById("cat");
+const yesResult = document.getElementById("yesResult");
 
 let count = 0;
 
 function moveButtonRandomly(button) {
-  const padding = 20; // keep button inside screen
+  const padding = 20;
   const maxX = window.innerWidth - button.offsetWidth - padding;
   const maxY = window.innerHeight - button.offsetHeight - padding;
 
@@ -107,6 +114,11 @@ noBtn.addEventListener("click", () => {
       main.classList.remove("hidden");
     }, 2000);
   }
+});
+
+yesBtn.addEventListener("click", () => {
+  main.classList.add("hidden");
+  yesResult.classList.remove("hidden");
 });
 </script>
 
