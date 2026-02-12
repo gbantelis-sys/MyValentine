@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Valentine 💘</title>
+  <style>
+    body {
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      background: #ffe6eb;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    button {
+      padding: 12px 28px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .yes {
+      background-color: #4caf50;
+      color: white;
+    }
+
+    .no {
+      background-color: #f44336;
+      color: white;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    img {
+      width: 250px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container" id="main">
+  <h1>Will you be my Valentine? 💘</h1>
+  <div class="buttons">
+    <button class="yes" onclick="alert('Yay!! 💕')">Yes</button>
+    <button class="no" id="noBtn">No</button>
+  </div>
+</div>
+
+<div class="container hidden" id="cat">
+  <h1>Stop messing with me 😾</h1>
+  <img src="https://i.imgur.com/8Km9tLL.png" alt="angry cat">
+</div>
+
+<script>
+  const noBtn = document.getElementById("noBtn");
+  const main = document.getElementById("main");
+  const cat = document.getElementById("cat");
+
+  let count = 0;
+
+  noBtn.addEventListener("mouseenter", () => {
+    count++;
+
+    // swap buttons
+    const parent = noBtn.parentElement;
+    parent.insertBefore(noBtn, parent.children[0]);
+
+    if (count >= 6) {
+      main.classList.add("hidden");
+      cat.classList.remove("hidden");
+
+      setTimeout(() => {
+        count = 0;
+        cat.classList.add("hidden");
+        main.classList.remove("hidden");
+      }, 2000);
+    }
+  });
+</script>
+
+</body>
+</html>
