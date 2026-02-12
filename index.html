@@ -72,11 +72,13 @@
 <div class="container hidden" id="cat">
   <h1>Stop messing with me 😾</h1>
   <img src="angry cat.png" alt="angry cat">
+  <p>(tap anywhere)</p>
 </div>
 
 <div class="container hidden" id="yesResult">
   <h1>Yay!! 💕</h1>
   <img src="yes.png" alt="happy image">
+  <p>(tap anywhere)</p>
 </div>
 
 <script>
@@ -100,6 +102,13 @@ function moveButtonRandomly(button) {
   button.style.top = randomY + "px";
 }
 
+function resetToMain() {
+  count = 0;
+  cat.classList.add("hidden");
+  yesResult.classList.add("hidden");
+  main.classList.remove("hidden");
+}
+
 noBtn.addEventListener("click", () => {
   count++;
   moveButtonRandomly(noBtn);
@@ -107,12 +116,6 @@ noBtn.addEventListener("click", () => {
   if (count >= 6) {
     main.classList.add("hidden");
     cat.classList.remove("hidden");
-
-    setTimeout(() => {
-      count = 0;
-      cat.classList.add("hidden");
-      main.classList.remove("hidden");
-    }, 2000);
   }
 });
 
@@ -120,6 +123,10 @@ yesBtn.addEventListener("click", () => {
   main.classList.add("hidden");
   yesResult.classList.remove("hidden");
 });
+
+// Tap anywhere on result screens to reset
+cat.addEventListener("click", resetToMain);
+yesResult.addEventListener("click", resetToMain);
 </script>
 
 </body>
