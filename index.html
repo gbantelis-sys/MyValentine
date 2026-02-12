@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Valentine 💘</title>
+
 <style>
   body {
     height: 100vh;
@@ -59,6 +61,32 @@
     width: 250px;
     margin-top: 20px;
   }
+
+  /* ===== Mobile adjustments ===== */
+  @media (max-width: 768px) {
+
+    h1 {
+      font-size: 28px;
+    }
+
+    button {
+      padding: 18px 36px;
+      font-size: 24px;
+    }
+
+    img {
+      width: 80vw;
+      max-width: 350px;
+    }
+
+    .yes {
+      left: 35%;
+    }
+
+    .no {
+      left: 65%;
+    }
+  }
 </style>
 </head>
 <body>
@@ -72,11 +100,13 @@
 <div class="container hidden" id="cat">
   <h1>Stop messing with me 😾</h1>
   <img src="angry cat.png" alt="angry cat">
+  <p>(tap anywhere)</p>
 </div>
 
 <div class="container hidden" id="yesResult">
   <h1>Yay!! 💕</h1>
   <img src="yes.png" alt="happy image">
+  <p>(tap anywhere)</p>
 </div>
 
 <script>
@@ -89,7 +119,7 @@ const yesResult = document.getElementById("yesResult");
 let count = 0;
 
 function moveButtonRandomly(button) {
-  const padding = 20;
+  const padding = 40;
   const maxX = window.innerWidth - button.offsetWidth - padding;
   const maxY = window.innerHeight - button.offsetHeight - padding;
 
@@ -122,7 +152,6 @@ yesBtn.addEventListener("click", () => {
   yesResult.classList.remove("hidden");
 });
 
-// Tap anywhere on result screens to reset
 cat.addEventListener("click", resetToMain);
 yesResult.addEventListener("click", resetToMain);
 </script>
